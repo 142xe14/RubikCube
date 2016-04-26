@@ -69,7 +69,7 @@ public class stdIhm {
 	}
 
 	private void createView() {
-		reset = new JButton("Mélange");
+		reset = new JButton("MÃ©lange");
 		reset.addActionListener(new resetListener());
 		ia = new JButton("Intelligence Artificielle");
 		ia.addActionListener(new iaListener());
