@@ -90,6 +90,28 @@ public class StdRubikCube implements RubikCube{
 		tabCube.get(15).setColor(tempoCube.get(13).getColor());
 		tabCube.get(13).setColor(tempoCube.get(12).getColor());	
 	}
+	
+	public void rotateLeftOver() {
+		ArrayList<StdCube> tempoCube = new ArrayList<StdCube>();
+		StdCube c;
+		for(int i = 0; i <=23; i++){
+			c = new StdCube();
+			tempoCube.add(c);
+			tempoCube.get(i).setColor(tabCube.get(i).getColor());
+		}
+		tabCube.get(16).setColor(tempoCube.get(0).getColor());
+		tabCube.get(18).setColor(tempoCube.get(2).getColor());
+		tabCube.get(11).setColor(tempoCube.get(16).getColor());
+		tabCube.get(9).setColor(tempoCube.get(18).getColor());
+		tabCube.get(20).setColor(tempoCube.get(11).getColor());
+		tabCube.get(22).setColor(tempoCube.get(9).getColor());
+		tabCube.get(2).setColor(tempoCube.get(22).getColor());
+		tabCube.get(0).setColor(tempoCube.get(20).getColor());
+		tabCube.get(14).setColor(tempoCube.get(12).getColor());
+		tabCube.get(15).setColor(tempoCube.get(14).getColor());
+		tabCube.get(13).setColor(tempoCube.get(15).getColor());
+		tabCube.get(12).setColor(tempoCube.get(13).getColor());	
+	}
 
 	@Override
 	public void rotateRight() {
@@ -116,6 +138,31 @@ public class StdRubikCube implements RubikCube{
 		tabCube.get(7).setColor(tempoCube.get(6).getColor());
 		tabCube.get(6).setColor(tempoCube.get(4).getColor());
 	}
+	
+	public void rotateRightOver() {
+		ArrayList<StdCube> tempoCube = new ArrayList<StdCube>();
+		StdCube c;
+		for(int i = 0; i <=23; i++){
+			c = new StdCube();
+			tempoCube.add(c);
+			tempoCube.get(i).setColor(tabCube.get(i).getColor());
+		}
+		tabCube.get(17).setColor(tempoCube.get(1).getColor());
+		tabCube.get(19).setColor(tempoCube.get(3).getColor());
+		//tabCube.get(17).setColor(tempoCube.get(8).getColor());
+		//tabCube.get(19).setColor(tempoCube.get(10).getColor());
+		tabCube.get(10).setColor(tempoCube.get(17).getColor());
+		tabCube.get(8).setColor(tempoCube.get(19).getColor());
+		tabCube.get(23).setColor(tempoCube.get(8).getColor());
+		tabCube.get(21).setColor(tempoCube.get(10).getColor());
+		tabCube.get(1).setColor(tempoCube.get(21).getColor());
+		tabCube.get(3).setColor(tempoCube.get(23).getColor());
+		//Valide
+		tabCube.get(5).setColor(tempoCube.get(4).getColor());
+		tabCube.get(7).setColor(tempoCube.get(5).getColor());
+		tabCube.get(6).setColor(tempoCube.get(7).getColor());
+		tabCube.get(4).setColor(tempoCube.get(6).getColor());
+	}
 
 	@Override
 	public void rotateUp() {
@@ -138,6 +185,28 @@ public class StdRubikCube implements RubikCube{
 		tabCube.get(18).setColor(tempoCube.get(19).getColor());
 		tabCube.get(19).setColor(tempoCube.get(17).getColor());
 		tabCube.get(17).setColor(tempoCube.get(16).getColor());
+	}
+	
+	public void rotateUpOver() {
+		ArrayList<StdCube> tempoCube = new ArrayList<StdCube>();
+		StdCube c;
+		for(int i = 0; i <=23; i++){
+			c = new StdCube();
+			tempoCube.add(c);
+			tempoCube.get(i).setColor(tabCube.get(i).getColor());
+		}
+		tabCube.get(4).setColor(tempoCube.get(0).getColor());
+		tabCube.get(5).setColor(tempoCube.get(1).getColor());
+		tabCube.get(8).setColor(tempoCube.get(4).getColor());
+		tabCube.get(9).setColor(tempoCube.get(5).getColor());
+		tabCube.get(12).setColor(tempoCube.get(8).getColor());
+		tabCube.get(13).setColor(tempoCube.get(9).getColor());
+		tabCube.get(0).setColor(tempoCube.get(12).getColor());
+		tabCube.get(1).setColor(tempoCube.get(13).getColor());
+		tabCube.get(18).setColor(tempoCube.get(16).getColor());
+		tabCube.get(19).setColor(tempoCube.get(18).getColor());
+		tabCube.get(17).setColor(tempoCube.get(19).getColor());
+		tabCube.get(16).setColor(tempoCube.get(17).getColor());
 	}
 
 	@Override
@@ -162,6 +231,28 @@ public class StdRubikCube implements RubikCube{
 		tabCube.get(23).setColor(tempoCube.get(22).getColor());
 		tabCube.get(22).setColor(tempoCube.get(20).getColor());
 	}
+	
+	public void rotateDownOver() {
+		ArrayList<StdCube> tempoCube = new ArrayList<StdCube>();
+		StdCube c;
+		for(int i = 0; i <=23; i++){
+			c = new StdCube();
+			tempoCube.add(c);
+			tempoCube.get(i).setColor(tabCube.get(i).getColor());
+		}
+		tabCube.get(6).setColor(tempoCube.get(2).getColor());
+		tabCube.get(7).setColor(tempoCube.get(3).getColor());
+		tabCube.get(10).setColor(tempoCube.get(6).getColor());
+		tabCube.get(11).setColor(tempoCube.get(7).getColor());
+		tabCube.get(14).setColor(tempoCube.get(10).getColor());
+		tabCube.get(15).setColor(tempoCube.get(11).getColor());
+		tabCube.get(2).setColor(tempoCube.get(14).getColor());
+		tabCube.get(3).setColor(tempoCube.get(15).getColor());
+		tabCube.get(21).setColor(tempoCube.get(20).getColor());
+		tabCube.get(23).setColor(tempoCube.get(21).getColor());
+		tabCube.get(22).setColor(tempoCube.get(23).getColor());
+		tabCube.get(20).setColor(tempoCube.get(22).getColor());
+	}
 
 	@Override
 	public void rotateFrontRight() {
@@ -185,6 +276,28 @@ public class StdRubikCube implements RubikCube{
 		tabCube.get(3).setColor(tempoCube.get(2).getColor());
 		tabCube.get(2).setColor(tempoCube.get(0).getColor());
 	}
+	
+	public void rotateFrontLeft() {
+		ArrayList<StdCube> tempoCube = new ArrayList<StdCube>();
+		StdCube c;
+		for(int i = 0; i <=23; i++){
+			c = new StdCube();
+			tempoCube.add(c);
+			tempoCube.get(i).setColor(tabCube.get(i).getColor());
+		}
+		tabCube.get(6).setColor(tempoCube.get(18).getColor());
+		tabCube.get(7).setColor(tempoCube.get(19).getColor());
+		tabCube.get(22).setColor(tempoCube.get(6).getColor());
+		tabCube.get(23).setColor(tempoCube.get(7).getColor());
+		tabCube.get(14).setColor(tempoCube.get(22).getColor());
+		tabCube.get(15).setColor(tempoCube.get(23).getColor());
+		tabCube.get(18).setColor(tempoCube.get(14).getColor());
+		tabCube.get(19).setColor(tempoCube.get(15).getColor());
+		tabCube.get(1).setColor(tempoCube.get(0).getColor());
+		tabCube.get(3).setColor(tempoCube.get(1).getColor());
+		tabCube.get(2).setColor(tempoCube.get(3).getColor());
+		tabCube.get(0).setColor(tempoCube.get(2).getColor());
+	}
 
 	@Override
 	public void rotateRearRight() {
@@ -207,6 +320,28 @@ public class StdRubikCube implements RubikCube{
 		tabCube.get(9).setColor(tempoCube.get(11).getColor());
 		tabCube.get(11).setColor(tempoCube.get(10).getColor());
 		tabCube.get(10).setColor(tempoCube.get(8).getColor());
+	}
+	
+	public void rotateRearLeft() {
+		ArrayList<StdCube> tempoCube = new ArrayList<StdCube>();
+		StdCube c;
+		for(int i = 0; i <=23; i++){
+			c = new StdCube();
+			tempoCube.add(c);
+			tempoCube.get(i).setColor(tabCube.get(i).getColor());
+		}
+		tabCube.get(4).setColor(tempoCube.get(16).getColor());
+		tabCube.get(5).setColor(tempoCube.get(17).getColor());
+		tabCube.get(20).setColor(tempoCube.get(4).getColor());
+		tabCube.get(21).setColor(tempoCube.get(5).getColor());
+		tabCube.get(12).setColor(tempoCube.get(20).getColor());
+		tabCube.get(13).setColor(tempoCube.get(21).getColor());
+		tabCube.get(16).setColor(tempoCube.get(12).getColor());
+		tabCube.get(17).setColor(tempoCube.get(13).getColor());
+		tabCube.get(9).setColor(tempoCube.get(8).getColor());
+		tabCube.get(11).setColor(tempoCube.get(9).getColor());
+		tabCube.get(10).setColor(tempoCube.get(11).getColor());
+		tabCube.get(8).setColor(tempoCube.get(10).getColor());
 	}
 	
 	@Override
@@ -327,6 +462,7 @@ public class StdRubikCube implements RubikCube{
 		}
 	}
 	
+	//IA basique
 	public void IA(){
 		for(int i = solution.size(); i > 0; i--){
 			switch(solution.get(i -1 )){
@@ -371,5 +507,9 @@ public class StdRubikCube implements RubikCube{
 					break;
 			}
 		}
+	}
+	
+	public void superIa(){
+		
 	}
 }
