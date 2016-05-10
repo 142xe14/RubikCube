@@ -45,11 +45,17 @@ public class stdIhm {
 	private JButton case22;
 	private JButton case23;
 	private JButton rotateLeft;
+	private JButton rotateLeftOver;
 	private JButton rotateRight;
+	private JButton rotateRightOver;
 	private JButton rotateUp;
+	private JButton rotateUpOver;
 	private JButton rotateDown;
+	private JButton rotateDownOver;
 	private JButton rotateFrontRight;
+	private JButton rotateFrontLeft;
 	private JButton rotateRearRight;
+	private JButton rotateRearLeft;
 	private JButton ia;
 	private JFrame frame;
 	private Dimension preferredSize;
@@ -75,16 +81,28 @@ public class stdIhm {
 		ia.addActionListener(new iaListener());
 		rotateLeft = new JButton("rotateLeft");
 		rotateLeft.addActionListener(new rotateLeftListener());
+		rotateLeftOver = new JButton("rotateLeftOver");
+		rotateLeftOver.addActionListener(new rotateLeftOverListener());
 		rotateRight = new JButton("rotateRight");
 		rotateRight.addActionListener(new rotateRightListener());
+		rotateRightOver = new JButton("RotateRightOver");
+		rotateRightOver.addActionListener(new rotateRightOverListener());
 		rotateDown = new JButton("rotateDown");
 		rotateDown.addActionListener(new rotateDownListener());
+		rotateDownOver = new JButton("rotateDownOver");
+		rotateDownOver.addActionListener(new rotateDownOverListener());
 		rotateUp = new JButton("rotateUp");
 		rotateUp.addActionListener(new rotateUpListener());
+		rotateUpOver = new JButton("rotateUpOver");
+		rotateUpOver.addActionListener(new rotateUpOverListener());
 		rotateFrontRight = new JButton("rotateFrontRight");
 		rotateFrontRight.addActionListener(new rotateFrontRightListener());
+		rotateFrontLeft = new JButton("rotateFrontLeft");
+		rotateFrontLeft.addActionListener(new rotateFrontLeftListener());
 		rotateRearRight = new JButton("rotateRearRight");
 		rotateRearRight.addActionListener(new rotateRearRightListener());
+		rotateRearLeft = new JButton("rotateRearLeft");
+		rotateRearLeft.addActionListener(new rotateRearLeftListener());
 		preferredSize = new Dimension(40,40);
 		case0 = new JButton();
 		case1 = new JButton();
@@ -222,14 +240,20 @@ public class stdIhm {
 		}
 		frame.add(p, BorderLayout.CENTER);
 		p = new JPanel();{
-			GridLayout gl = new GridLayout(3,2);
+			GridLayout gl = new GridLayout(6,2);
 			p.setLayout(gl);
 			p.add(rotateLeft);
+			p.add(rotateLeftOver);
 			p.add(rotateRight);
+			p.add(rotateRightOver);
 			p.add(rotateUp);
+			p.add(rotateUpOver);
 			p.add(rotateDown);
+			p.add(rotateDownOver);
 			p.add(rotateFrontRight);
+			p.add(rotateFrontLeft);
 			p.add(rotateRearRight);
+			p.add(rotateRearLeft);
 		}
 		frame.add(p, BorderLayout.SOUTH);
 		p = new JPanel();{
@@ -304,11 +328,27 @@ public class stdIhm {
 		}
 	}
 	
+	class rotateLeftOverListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			pocketCube.rotateLeftOver();
+			setColor();
+		}
+	}
+	
 	class rotateRightListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			pocketCube.rotateRight();
 			pocketCube.solution.add('r');
+			setColor();
+		}
+	}
+	
+	class rotateRightOverListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			pocketCube.rotateRightOver();
 			setColor();
 		}
 	}
@@ -322,11 +362,27 @@ public class stdIhm {
 		}
 	}
 	
+	class rotateDownOverListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			pocketCube.rotateDownOver();
+			setColor();
+		}	
+	}
+	
 	class rotateUpListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			pocketCube.rotateUp();	
 			pocketCube.solution.add('u');
+			setColor();
+		}
+	}
+	
+	class rotateUpOverListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			pocketCube.rotateUpOver();
 			setColor();
 		}
 	}
@@ -340,6 +396,13 @@ public class stdIhm {
 		}
 	}
 	
+	class rotateFrontLeftListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			pocketCube.rotateFrontLeft();
+			setColor();
+		}		
+	}
 	class rotateRearRightListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -347,6 +410,15 @@ public class stdIhm {
 			pocketCube.solution.add('o');
 			setColor();
 		}
+	}
+	
+	class rotateRearLeftListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			pocketCube.rotateRearLeft();
+			setColor();
+		}
+		
 	}
 	
 	public static void main(String args[]){
