@@ -508,8 +508,36 @@ public class StdRubikCube implements RubikCube{
 			}
 		}
 	}
-	
+
+	/** This Fonction check if the game is finished **/
+	public boolean checkVictory() {
+		int check0 = 0;
+		int check1 = 1;
+		int totalCube = 0;
+		while (totalCube < 6 && totalCube >= 0) {
+			if (tabCube.get(check0).getColor() == tabCube.get(check1).getColor()) {
+				check0++;
+				check1++;
+				if (tabCube.get(check0).getColor() == tabCube.get(check1).getColor()) {
+					check0++;
+					check1++;
+					if (tabCube.get(check0).getColor() == tabCube.get(check1).getColor()) {
+						check0= check0 + 2;
+						check1 = check1 + 2;
+						totalCube++;
+					}
+				}
+			} else
+				totalCube = -1;
+		}
+		if (totalCube != -1)
+			return true;
+		else
+			return false;
+	}
+
 	public void superIa(){
-		
+		ArrayList<StdCube> list1= new ArrayList<>();
+
 	}
 }
