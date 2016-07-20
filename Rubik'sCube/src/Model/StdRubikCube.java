@@ -538,6 +538,10 @@ public class StdRubikCube implements RubikCube{
 
 	public void superIa(){
 		ArrayList<StdCube> list1= new ArrayList<>();
+		for(int i = 0; i <= 23; i++){
+			list1.get(i).setColor(tabCube.get(i).getColor()); 
+		}
+		
 
 	}
 }
