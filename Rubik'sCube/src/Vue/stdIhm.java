@@ -318,7 +318,7 @@ public class stdIhm {
 		public void actionPerformed(ActionEvent arg0) {
 			//pocketCube = new StdRubikCube();
 			//Collections.shuffle(StdRubikCube.tabCube);
-			pocketCube.IA();
+			pocketCube.superIa();
 			setColor();
 		}
 	}

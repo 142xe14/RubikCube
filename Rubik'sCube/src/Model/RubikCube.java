@@ -55,4 +55,16 @@ public interface RubikCube {
 	 * Affiche le rubikCube sous forme de texte
 	 */
 	public void printCube();
+	
+	public void rotateLeft(ArrayList<StdCube> myTestingCube);
+	
+	public void rotateRight(ArrayList<StdCube> myTestingCube);
+	
+	public void rotateUp(ArrayList<StdCube> myTestingCube);
+	
+	public void rotateDown(ArrayList<StdCube> myTestingCube);
+	
+	public void rotateFrontRight(ArrayList<StdCube> myTestingCube);
+	
+	public void rotateRearRight(ArrayList<StdCube> myTestingCube);
 }
