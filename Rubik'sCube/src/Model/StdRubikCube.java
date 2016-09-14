@@ -2,6 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Random;
 
 public class StdRubikCube implements RubikCube{
@@ -53,18 +54,43 @@ public class StdRubikCube implements RubikCube{
 		switch(c){
 			case 'l':
 				rotateLeft();
+				break;
 			case 'r':
 				rotateRight();
+				break;
 			case 'u':
 				rotateUp();
+				break;
 			case 'd':
 				rotateDown();
+				break;
 			case 'f':
 				rotateFrontRight();
+				break;
+			case 'h':
+				rotateFrontLeft();
+				break;
 			case 'e':
 				rotateRearRight();
+				break;
+			case 'j':
+				rotateRearLeft();
+				break;
+			case 'a':
+				rotateLeftOver();
+				break;
+			case 'b':
+				rotateRightOver();
+				break;
+			case 'c':
+				rotateUpOver();
+				break;
+			case 'g':
+				rotateDownOver();
+				break;
 			default:
 				System.out.println("error");
+				break;
 		}
 	}
 
@@ -509,24 +535,31 @@ public class StdRubikCube implements RubikCube{
 		}
 	}
 
-	/** This Fonction check if the game is finished **/
+	/** This Function check if the game is finished **/
 	public boolean checkVictory(ArrayList<StdCube> myTestingCube) {
 		int check0 = 0;
 		int check1 = 1;
 		int totalCube = 0;
 		while (totalCube < 6 && totalCube >= 0) {
+			//si 0 = 1
 			if (myTestingCube.get(check0).getColor() == myTestingCube.get(check1).getColor()) {
 				check0++;
 				check1++;
+				//Si 1 = 2
 				if (myTestingCube.get(check0).getColor() == myTestingCube.get(check1).getColor()) {
 					check0++;
 					check1++;
+					//si 2 = 3
 					if (myTestingCube.get(check0).getColor() == myTestingCube.get(check1).getColor()) {
 						check0= check0 + 2;
 						check1 = check1 + 2;
 						totalCube++;
 					}
+					else
+						totalCube = -1;
 				}
+				else
+					totalCube = -1;
 			} else
 				totalCube = -1;
 		}
@@ -536,18 +569,23 @@ public class StdRubikCube implements RubikCube{
 			return false;
 	}
 
-	//TODO Method for know if a list is more close of the solution than an other list
+	//Un algorithme ressemblant à celui de Belmann-Ford. Peut être optimisé
 	public void superIa(){
 		ArrayList<ArrayList<StdCube>> list1= new ArrayList<>();
 		ArrayList<StdCube> toAdd= new ArrayList<>();
+		ArrayList<Character> movementList = new ArrayList<>();
+		HashMap<ArrayList<StdCube>, ArrayList<Character>> myConnected = new HashMap<>();
+		ArrayList<ArrayList<Character>> connected = new ArrayList<>();
+		ArrayList<Character> tempo = new ArrayList<>();
 		StdCube c;
-		System.out.println("Hey");
+		char movement;
 		boolean isSolution = false;
 		boolean otherType = false;
 		while(isSolution == false){
 			if (otherType == false){
 				for(int j = 0; j <=11; j++){
 					toAdd = new ArrayList<>();
+					movementList = new ArrayList<>();
 					switch(j){
 						case 0:
 							rotateLeft();
@@ -556,8 +594,12 @@ public class StdRubikCube implements RubikCube{
 								toAdd.add(c);
 								toAdd.get(i).setColor(tabCube.get(i).getColor());
 							}
+							movement = 'l';
+							movementList.add(movement);
+							connected.add(movementList);
 							rotateRight(); //Annule le rotateLeft
 							list1.add(toAdd);
+							myConnected.put(toAdd, movementList);
 							break;
 						case 1:
 							rotateRight();
@@ -566,8 +608,12 @@ public class StdRubikCube implements RubikCube{
 								toAdd.add(c);
 								toAdd.get(i).setColor(tabCube.get(i).getColor());
 							}
+							movement = 'r';
+							movementList.add(movement);
+							connected.add(movementList);
 							rotateLeft();
 							list1.add(toAdd);
+							myConnected.put(toAdd, movementList);
 							break;
 						case 2:
 							rotateUp();
@@ -576,8 +622,12 @@ public class StdRubikCube implements RubikCube{
 								toAdd.add(c);
 								toAdd.get(i).setColor(tabCube.get(i).getColor());
 							}
+							movement = 'u';
+							movementList.add(movement);
+							connected.add(movementList);
 							rotateDown();
 							list1.add(toAdd);
+							myConnected.put(toAdd, movementList);
 							break;	
 						case 3:
 							rotateDown();
@@ -586,8 +636,12 @@ public class StdRubikCube implements RubikCube{
 								toAdd.add(c);
 								toAdd.get(i).setColor(tabCube.get(i).getColor());
 							}
+							movement = 'd';
+							movementList.add(movement);
+							connected.add(movementList);
 							rotateUp();
 							list1.add(toAdd);
+							myConnected.put(toAdd, movementList);
 							break;
 						case 4:
 							rotateLeftOver();
@@ -596,8 +650,12 @@ public class StdRubikCube implements RubikCube{
 								toAdd.add(c);
 								toAdd.get(i).setColor(tabCube.get(i).getColor());
 							}
+							movement = 'a';
+							movementList.add(movement);
+							connected.add(movementList);
 							rotateRightOver();
 							list1.add(toAdd);
+							myConnected.put(toAdd, movementList);
 							break;	
 						case 5:
 							rotateRightOver();
@@ -606,8 +664,12 @@ public class StdRubikCube implements RubikCube{
 								toAdd.add(c);
 								toAdd.get(i).setColor(tabCube.get(i).getColor());
 							}
+							movement = 'b';
+							movementList.add(movement);
+							connected.add(movementList);
 							rotateLeftOver();
 							list1.add(toAdd);
+							myConnected.put(toAdd, movementList);
 							break;
 						case 6:
 							rotateUpOver();
@@ -616,8 +678,12 @@ public class StdRubikCube implements RubikCube{
 								toAdd.add(c);
 								toAdd.get(i).setColor(tabCube.get(i).getColor());
 							}
+							movement = 'c';
+							movementList.add(movement);
+							connected.add(movementList);
 							rotateDownOver();
 							list1.add(toAdd);
+							myConnected.put(toAdd, movementList);
 							break;
 						case 7:
 							rotateDownOver();
@@ -626,8 +692,12 @@ public class StdRubikCube implements RubikCube{
 								toAdd.add(c);
 								toAdd.get(i).setColor(tabCube.get(i).getColor());
 							}
+							movement = 'g';
+							movementList.add(movement);
+							connected.add(movementList);
 							rotateUpOver();
 							list1.add(toAdd);
+							myConnected.put(toAdd, movementList);
 							break;	
 						case 8:
 							rotateFrontRight();
@@ -636,8 +706,12 @@ public class StdRubikCube implements RubikCube{
 								toAdd.add(c);
 								toAdd.get(i).setColor(tabCube.get(i).getColor());
 							}
+							movement = 'f';
+							movementList.add(movement);
+							connected.add(movementList);
 							rotateFrontLeft();
 							list1.add(toAdd);
+							myConnected.put(toAdd, movementList);
 							break;	
 						case 9:
 							rotateFrontLeft();
@@ -646,8 +720,12 @@ public class StdRubikCube implements RubikCube{
 								toAdd.add(c);
 								toAdd.get(i).setColor(tabCube.get(i).getColor());
 							}
+							movement = 'h';
+							movementList.add(movement);
+							connected.add(movementList);
 							rotateFrontRight();
 							list1.add(toAdd);
+							myConnected.put(toAdd, movementList);
 							break;	
 						case 10:
 							rotateRearRight();
@@ -656,8 +734,12 @@ public class StdRubikCube implements RubikCube{
 								toAdd.add(c);
 								toAdd.get(i).setColor(tabCube.get(i).getColor());
 							}
+							movement = 'e';
+							movementList.add(movement);
+							connected.add(movementList);
 							rotateRearLeft();
 							list1.add(toAdd);
+							myConnected.put(toAdd, movementList);
 							break;
 						case 11:
 							rotateRearLeft();
@@ -666,158 +748,199 @@ public class StdRubikCube implements RubikCube{
 								toAdd.add(c);
 								toAdd.get(i).setColor(tabCube.get(i).getColor());
 							}
+							movement = 'j';
+							movementList.add(movement);
+							connected.add(movementList);
 							rotateRearRight();
 							list1.add(toAdd);
+							myConnected.put(toAdd, movementList);
 							break;	
 						default:
 							System.out.println("Vous êtes dans la matrice");
 					}	
-					list1.add(toAdd);
 				}
-			}	
+			}
 			else{
 				int size = list1.size();
 				for(int i = 0; i < size; i++){
 					for(int j = 0; j<=11; j++){
 						toAdd = new ArrayList<>();
-						ArrayList<StdCube> list2= new ArrayList<>();
-						list2 = list1.get(i);
+						tempo = new ArrayList<>(connected.get(i));
 						switch(j){
 							case 0:
-								rotateLeft(list2);
+								rotateLeft(list1.get(i));
 								for(int k = 0; k <=23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list2.get(k).getColor());
+									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
-								rotateRight(list2); //Annule le rotateLeft
+								movement = 'l';
+								tempo.add(movement);
+								connected.add(tempo);
+								rotateRight(list1.get(i)); //Annule le rotateLeft
 								list1.add(toAdd);
 								break;
 							case 1:
-								rotateRight(list2);
+								rotateRight(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list2.get(k).getColor());
+									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
-								rotateLeft(list2);
+								movement = 'r';
+								tempo.add(movement);
+								connected.add(tempo);
+								rotateLeft(list1.get(i));
 								list1.add(toAdd);
 								break;
 							case 2:
-								rotateUp(list2);
+								rotateUp(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list2.get(k).getColor());
+									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
-								rotateDown(list2);
+								movement = 'u';
+								tempo.add(movement);
+								connected.add(tempo);
+								rotateDown(list1.get(i));
 								list1.add(toAdd);
 								break;	
 							case 3:
-								rotateDown(list2);
+								rotateDown(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list2.get(k).getColor());
+									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
-								rotateUp(list2);
+								movement = 'd';
+								tempo.add(movement);
+								connected.add(tempo);
+								rotateUp(list1.get(i));
 								list1.add(toAdd);
 								break;
 							case 4:
-								rotateLeftOver(list2);
+								rotateLeftOver(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list2.get(k).getColor());
+									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
-								rotateRightOver(list2);
+								movement = 'a';
+								tempo.add(movement);
+								connected.add(tempo);
+								rotateRightOver(list1.get(i));
 								list1.add(toAdd);
 								break;	
 							case 5:
-								rotateRightOver(list2);
+								rotateRightOver(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list2.get(k).getColor());
+									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
-								rotateLeftOver(list2);
+								movement = 'b';
+								tempo.add(movement);
+								connected.add(tempo);
+								rotateLeftOver(list1.get(i));
 								list1.add(toAdd);
 								break;
 							case 6:
-								rotateUpOver(list2);
+								rotateUpOver(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list2.get(k).getColor());
+									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
-								rotateDownOver(list2);
+								movement = 'c';
+								tempo.add(movement);
+								connected.add(tempo);
+								rotateDownOver(list1.get(i));
 								list1.add(toAdd);
 								break;
 							case 7:
-								rotateDownOver(list2);
+								rotateDownOver(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list2.get(k).getColor());
+									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
-								rotateUpOver(list2);
+								movement = 'g';
+								tempo.add(movement);
+								connected.add(tempo);
+								rotateUpOver(list1.get(i));
 								list1.add(toAdd);
 								break;	
 							case 8:
-								rotateFrontRight(list2);
+								rotateFrontRight(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list2.get(k).getColor());
+									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
-								rotateFrontLeft(list2);
+								movement = 'f';
+								tempo.add(movement);
+								connected.add(tempo);
+								rotateFrontLeft(list1.get(i));
 								list1.add(toAdd);
 								break;	
 							case 9:
-								rotateFrontLeft(list2);
+								rotateFrontLeft(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list2.get(k).getColor());
+									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
-								rotateFrontRight(list2);
+								movement = 'h';
+								tempo.add(movement);
+								connected.add(tempo);
+								rotateFrontRight(list1.get(i));
 								list1.add(toAdd);
 								break;	
 							case 10:
-								rotateRearRight(list2);
+								rotateRearRight(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list2.get(k).getColor());
+									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
-								rotateRearLeft(list2);
+								movement = 'e';
+								tempo.add(movement);
+								connected.add(tempo);
+								rotateRearLeft(list1.get(i));
 								list1.add(toAdd);
 								break;
 							case 11:
-								rotateRearLeft(list2);
+								rotateRearLeft(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list2.get(k).getColor());
+									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
-								rotateRearRight(list2);
+								movement = 'j';
+								tempo.add(movement);
+								connected.add(tempo);
+								rotateRearRight(list1.get(i));
 								list1.add(toAdd);
 								break;	
 							default:
 								System.out.println("Vous êtes dans la matrice");
+								break;
 						}	
-
 					}
 				}
 			}
 			for(int i = 0; i < list1.size(); i++){
-				if(checkVictory(list1.get(i)) == true){
-					System.out.println("Hallelujah!!!");
+				if(checkVictory(list1.get(i)) == true && isSolution == false){
+						for(int j = 0; j < connected.get(i).size(); j++){
+							System.out.println(connected.get(i));
+							chooseMovement(connected.get(i).get(j));
+					}	
 					isSolution = true;
 				}
 			}
 			otherType = true;
-			System.out.println("Salut toi!");
+			System.out.println(list1.size());
 	}	
 	System.out.println("Solution trouvé");	
 }
