@@ -571,6 +571,7 @@ public class StdRubikCube implements RubikCube{
 
 	//Un algorithme ressemblant à celui de Belmann-Ford. Peut être optimisé
 	public void superIa(){
+		
 		ArrayList<ArrayList<StdCube>> list1= new ArrayList<>();
 		ArrayList<StdCube> toAdd= new ArrayList<>();
 		ArrayList<Character> movementList = new ArrayList<>();
@@ -578,8 +579,14 @@ public class StdRubikCube implements RubikCube{
 		ArrayList<ArrayList<Character>> connected = new ArrayList<>();
 		ArrayList<Character> tempo = new ArrayList<>();
 		StdCube c;
+		int size;
+		int oldSize = 0;
 		char movement;
 		boolean isSolution = false;
+		if(checkVictory(tabCube) == true){
+			System.out.println("Le pocket cube est déjà fini!");
+			isSolution = true;
+		}
 		boolean otherType = false;
 		while(isSolution == false){
 			if (otherType == false){
@@ -597,7 +604,7 @@ public class StdRubikCube implements RubikCube{
 							movement = 'l';
 							movementList.add(movement);
 							connected.add(movementList);
-							rotateRight(); //Annule le rotateLeft
+							rotateLeftOver(); //Annule le rotateLeft
 							list1.add(toAdd);
 							myConnected.put(toAdd, movementList);
 							break;
@@ -611,7 +618,7 @@ public class StdRubikCube implements RubikCube{
 							movement = 'r';
 							movementList.add(movement);
 							connected.add(movementList);
-							rotateLeft();
+							rotateRightOver();
 							list1.add(toAdd);
 							myConnected.put(toAdd, movementList);
 							break;
@@ -625,7 +632,7 @@ public class StdRubikCube implements RubikCube{
 							movement = 'u';
 							movementList.add(movement);
 							connected.add(movementList);
-							rotateDown();
+							rotateUpOver();
 							list1.add(toAdd);
 							myConnected.put(toAdd, movementList);
 							break;	
@@ -639,7 +646,7 @@ public class StdRubikCube implements RubikCube{
 							movement = 'd';
 							movementList.add(movement);
 							connected.add(movementList);
-							rotateUp();
+							rotateDownOver();
 							list1.add(toAdd);
 							myConnected.put(toAdd, movementList);
 							break;
@@ -653,7 +660,7 @@ public class StdRubikCube implements RubikCube{
 							movement = 'a';
 							movementList.add(movement);
 							connected.add(movementList);
-							rotateRightOver();
+							rotateLeft();
 							list1.add(toAdd);
 							myConnected.put(toAdd, movementList);
 							break;	
@@ -667,7 +674,7 @@ public class StdRubikCube implements RubikCube{
 							movement = 'b';
 							movementList.add(movement);
 							connected.add(movementList);
-							rotateLeftOver();
+							rotateRight();
 							list1.add(toAdd);
 							myConnected.put(toAdd, movementList);
 							break;
@@ -681,7 +688,7 @@ public class StdRubikCube implements RubikCube{
 							movement = 'c';
 							movementList.add(movement);
 							connected.add(movementList);
-							rotateDownOver();
+							rotateUp();
 							list1.add(toAdd);
 							myConnected.put(toAdd, movementList);
 							break;
@@ -695,7 +702,7 @@ public class StdRubikCube implements RubikCube{
 							movement = 'g';
 							movementList.add(movement);
 							connected.add(movementList);
-							rotateUpOver();
+							rotateDown();
 							list1.add(toAdd);
 							myConnected.put(toAdd, movementList);
 							break;	
@@ -758,11 +765,11 @@ public class StdRubikCube implements RubikCube{
 						default:
 							System.out.println("Vous êtes dans la matrice");
 					}	
-				}
+				}	
 			}
 			else{
-				int size = list1.size();
-				for(int i = 0; i < size; i++){
+				size = list1.size();
+				for(int i = oldSize; i < size; i++){
 					for(int j = 0; j<=11; j++){
 						toAdd = new ArrayList<>();
 						tempo = new ArrayList<>(connected.get(i));
@@ -771,112 +778,112 @@ public class StdRubikCube implements RubikCube{
 								rotateLeft(list1.get(i));
 								for(int k = 0; k <=23; k++){
 									c = new StdCube();
+									c.setColor(list1.get(i).get(k).getColor());
 									toAdd.add(c);
-									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
 								movement = 'l';
 								tempo.add(movement);
 								connected.add(tempo);
-								rotateRight(list1.get(i)); //Annule le rotateLeft
+								rotateLeftOver(list1.get(i)); //Annule le rotateLeft
 								list1.add(toAdd);
 								break;
 							case 1:
 								rotateRight(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
+									c.setColor(list1.get(i).get(k).getColor());
 									toAdd.add(c);
-									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
 								movement = 'r';
 								tempo.add(movement);
 								connected.add(tempo);
-								rotateLeft(list1.get(i));
+								rotateRightOver(list1.get(i));
 								list1.add(toAdd);
 								break;
 							case 2:
 								rotateUp(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
+									c.setColor(list1.get(i).get(k).getColor());
 									toAdd.add(c);
-									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
 								movement = 'u';
 								tempo.add(movement);
 								connected.add(tempo);
-								rotateDown(list1.get(i));
+								rotateUpOver(list1.get(i));
 								list1.add(toAdd);
 								break;	
 							case 3:
 								rotateDown(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
+									c.setColor(list1.get(i).get(k).getColor());
 									toAdd.add(c);
-									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
 								movement = 'd';
 								tempo.add(movement);
 								connected.add(tempo);
-								rotateUp(list1.get(i));
+								rotateDownOver(list1.get(i));
 								list1.add(toAdd);
 								break;
 							case 4:
 								rotateLeftOver(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
+									c.setColor(list1.get(i).get(k).getColor());
 									toAdd.add(c);
-									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
 								movement = 'a';
 								tempo.add(movement);
 								connected.add(tempo);
-								rotateRightOver(list1.get(i));
+								rotateLeft(list1.get(i));
 								list1.add(toAdd);
 								break;	
 							case 5:
 								rotateRightOver(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
+									c.setColor(list1.get(i).get(k).getColor());
 									toAdd.add(c);
-									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
 								movement = 'b';
 								tempo.add(movement);
 								connected.add(tempo);
-								rotateLeftOver(list1.get(i));
+								rotateRight(list1.get(i));
 								list1.add(toAdd);
 								break;
 							case 6:
 								rotateUpOver(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
+									c.setColor(list1.get(i).get(k).getColor());
 									toAdd.add(c);
-									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
 								movement = 'c';
 								tempo.add(movement);
 								connected.add(tempo);
-								rotateDownOver(list1.get(i));
+								rotateUp(list1.get(i));
 								list1.add(toAdd);
 								break;
 							case 7:
 								rotateDownOver(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
+									c.setColor(list1.get(i).get(k).getColor());
 									toAdd.add(c);
-									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
 								movement = 'g';
 								tempo.add(movement);
 								connected.add(tempo);
-								rotateUpOver(list1.get(i));
+								rotateDown(list1.get(i));
 								list1.add(toAdd);
 								break;	
 							case 8:
 								rotateFrontRight(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
+									c.setColor(list1.get(i).get(k).getColor());
 									toAdd.add(c);
-									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
 								movement = 'f';
 								tempo.add(movement);
@@ -888,8 +895,8 @@ public class StdRubikCube implements RubikCube{
 								rotateFrontLeft(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
+									c.setColor(list1.get(i).get(k).getColor());
 									toAdd.add(c);
-									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
 								movement = 'h';
 								tempo.add(movement);
@@ -902,7 +909,8 @@ public class StdRubikCube implements RubikCube{
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
 									toAdd.add(c);
-									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
+									c.setColor(list1.get(i).get(k).getColor());
+
 								}
 								movement = 'e';
 								tempo.add(movement);
@@ -914,8 +922,8 @@ public class StdRubikCube implements RubikCube{
 								rotateRearLeft(list1.get(i));
 								for(int k = 0; k <= 23; k++){
 									c = new StdCube();
+									c.setColor(list1.get(i).get(k).getColor());
 									toAdd.add(c);
-									toAdd.get(k).setColor(list1.get(i).get(k).getColor());
 								}
 								movement = 'j';
 								tempo.add(movement);
@@ -929,14 +937,14 @@ public class StdRubikCube implements RubikCube{
 						}	
 					}
 				}
+				oldSize = size;
 			}
-			for(int i = 0; i < list1.size(); i++){
+			for(int i = oldSize; i < list1.size(); i++){
 				if(checkVictory(list1.get(i)) == true && isSolution == false){
-						for(int j = 0; j < connected.get(i).size(); j++){
-							System.out.println(connected.get(i));
-							chooseMovement(connected.get(i).get(j));
-					}	
-					isSolution = true;
+					for(int j = 0; j < connected.get(i).size(); j++){
+						System.out.println(connected.get(i));
+						chooseMovement(connected.get(i).get(j));
+					}
 				}
 			}
 			otherType = true;
@@ -945,7 +953,6 @@ public class StdRubikCube implements RubikCube{
 	System.out.println("Solution trouvé");	
 }
 
-	@Override
 	public void rotateLeft(ArrayList<StdCube> myTestingCube) {
 		ArrayList<StdCube> tempoCube = new ArrayList<StdCube>();
 		StdCube c;
@@ -990,7 +997,6 @@ public class StdRubikCube implements RubikCube{
 		myTestingCube.get(12).setColor(tempoCube.get(13).getColor());	
 	}
 
-	@Override
 	public void rotateRight(ArrayList<StdCube> myTestingCube) {
 		ArrayList<StdCube> tempoCube = new ArrayList<StdCube>();
 		StdCube c;
@@ -1041,7 +1047,6 @@ public class StdRubikCube implements RubikCube{
 		myTestingCube.get(4).setColor(tempoCube.get(6).getColor());
 	}
 
-	@Override
 	public void rotateUp(ArrayList<StdCube> myTestingCube) {
 		ArrayList<StdCube> tempoCube = new ArrayList<StdCube>();
 		StdCube c;
@@ -1086,7 +1091,6 @@ public class StdRubikCube implements RubikCube{
 		myTestingCube.get(16).setColor(tempoCube.get(17).getColor());
 	}
 
-	@Override
 	public void rotateDown(ArrayList<StdCube> myTestingCube) {
 		ArrayList<StdCube> tempoCube = new ArrayList<StdCube>();
 		StdCube c;
@@ -1131,7 +1135,6 @@ public class StdRubikCube implements RubikCube{
 		myTestingCube.get(20).setColor(tempoCube.get(22).getColor());
 	}
 
-	@Override
 	public void rotateFrontRight(ArrayList<StdCube> myTestingCube) {
 		ArrayList<StdCube> tempoCube = new ArrayList<StdCube>();
 		StdCube c;
@@ -1176,7 +1179,6 @@ public class StdRubikCube implements RubikCube{
 		myTestingCube.get(0).setColor(tempoCube.get(2).getColor());
 	}
 
-	@Override
 	public void rotateRearRight(ArrayList<StdCube> myTestingCube) {
 		ArrayList<StdCube> tempoCube = new ArrayList<StdCube>();
 		StdCube c;
