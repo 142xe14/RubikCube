@@ -945,6 +945,7 @@ public class StdRubikCube implements RubikCube{
 						System.out.println(connected.get(i));
 						chooseMovement(connected.get(i).get(j));
 					}
+					isSolution = true;
 				}
 			}
 			otherType = true;
